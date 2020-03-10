@@ -1,0 +1,27 @@
+server:
+  port: 9527
+
+spring:
+  application:
+    name: springcloud-zuul
+
+eureka:
+  client:
+    service-url:
+      defaultZone:  http://127.0.0.1:7001/eureka/,http://127.0.0.1:7002/eureka/,http://127.0.0.1:7003/eureka/
+    instance:
+      #可以将localhost改为(kzj.com域名)
+      #我这里不想改C:\Windows\System32\drivers\etc\host文件的配置所以访问的时候把localhost当成kzj.com使用
+      instance-id:  kzj.com
+      prefer-ip-address: true
+
+info:
+  app.name: kzj-springcloud
+  company.name: kzj.com
+
+zuul:
+  routes:
+    mydept.serviceId: springcloud-provider-dept
+    mydept.path: /mydept/**                         #将服务名改一个名字代替服务名
+  ignored-services: springcloud-provider-dept       #忽略服务名，不能用服务名访问了
+  prefix:                                           #设置公共前缀

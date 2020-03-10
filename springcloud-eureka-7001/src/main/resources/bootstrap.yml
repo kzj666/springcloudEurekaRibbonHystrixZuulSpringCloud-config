@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    config:
+      uri: http://localhost:3344  #服务器地址
+      name: config-eureka         #需要从gitee上读取的资源名称
+      profile: dev                #开发模式  test是测试模式
+      label: master               #geitee的分支

@@ -1,0 +1,78 @@
+spring:
+  profiles:
+   active: dev
+  
+---
+Server:
+  port: 8001
+  
+
+#mybatis配置
+mybatis:
+  type-aliases-package: com.common.springcloud.pojo
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  config-location: classpath:mybatis/mybatis-config.xml
+
+
+#spring配置
+spring:
+  profiles: dev
+  application:
+    name: springcloud-config-dept         #对应着erueka的Application的名字
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/db01?useUnicode=true&serverTimezone=GMT%2B8&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: admin
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+#Eureka的配置，服务注册到哪里
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka/,http://127.0.0.1:7002/eureka/,http://127.0.0.1:7003/eureka/
+  instance:
+    instance-id: springcloud-provider-dept8001  #修改eureka默认描述信息就是status
+
+#info配置
+info:
+  app.name: kzj-springcloud
+  company.name: com.common.kzj
+  
+---
+Server:
+  port: 8001
+  
+
+#mybatis配置
+mybatis:
+  type-aliases-package: com.common.springcloud.pojo
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  config-location: classpath:mybatis/mybatis-config.xml
+
+
+#spring配置
+spring:
+  profiles: test
+  application:
+    name: springcloud-config-dept         #对应着erueka的Application的名字
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/db02?useUnicode=true&serverTimezone=GMT%2B8&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: admin
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+#Eureka的配置，服务注册到哪里
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka/,http://127.0.0.1:7002/eureka/,http://127.0.0.1:7003/eureka/
+  instance:
+    instance-id: springcloud-provider-dept8001  #修改eureka默认描述信息就是status
+
+#info配置
+info:
+  app.name: kzj-springcloud
+  company.name: com.common.kzj
+  

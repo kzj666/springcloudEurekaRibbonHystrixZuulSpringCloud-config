@@ -1,0 +1,4 @@
+#使用springcloud-config配置后，application.yml配置一个服务名就行了
+spring:
+  application:
+    name: springcloud-config-eureka-7001

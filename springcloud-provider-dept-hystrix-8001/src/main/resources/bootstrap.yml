@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    config:
+      name: config-dept               #需要从gitHub上读取的资源名称,注意没有yml后缀名
+      label:  master                  #对应的是访问那个分支
+      profile:  dev                   #对应配置服务中的{profile}
+      uri: http://localhost:3344      #SpringCloud获取服务地址

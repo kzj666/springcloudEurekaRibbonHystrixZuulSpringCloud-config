@@ -1,0 +1,53 @@
+Server:
+  port: 8002
+
+#mybatis配置
+mybatis:
+  type-aliases-package: com.common.springcloud.pojo
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  config-location: classpath:mybatis/mybatis-config.xml
+
+
+#spring配置
+spring:
+  application:
+    name: SPRINGCLOUD-PROVIDER-DEPT         #对应着erueka的Application的名字
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/db02?useUnicode=true&serverTimezone=GMT%2B8&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: admin
+    driver-class-name:
+  #以下为新增
+  druid:
+    # 指明是否在从池中取出连接前进行检验,如果检验失败, 则从池中去除连接并尝试取出另一个，
+    #注意: 设置为true后如果要生效,validationQuery参数必须设置为非空字符串
+    test-on-borrow: false
+    # 指明连接是否被空闲连接回收器(如果有)进行检验.如果检测失败,则连接将被从池中去除.
+    #注意: 设置为true后如果要生效,validationQuery参数必须设置为非空字符串
+    test-while-idle: true
+    # 指明是否在归还到池中前进行检验，注意: 设置为true后如果要生效,
+    #validationQuery参数必须设置为非空字符串
+    test-on-return: false
+    # SQL查询,用来验证从连接池取出的连接,在将连接返回给调用者之前.
+    #如果指定,则查询必须是一个SQL SELECT并且必须返回至少一行记录
+    validation-query: select 1
+
+#Eureka的配置，服务注册到哪里
+eureka:
+  client:
+    service-url:
+      #做集群需要关联集群的eureka服务器的地址,其实端口号都应该是7001，
+      #关联的只是服务器地址，这里因为只有一台电脑，就用了端口号代替
+      defaultZone: http://127.0.0.1:7001/eureka/,http://127.0.0.1:7002/eureka/,http://127.0.0.1:7003/eureka/
+    # 此应用为注册中心，false：不向注册中心注册自己
+    #register-with-eureka: false
+    # 注册中心职责是维护服务实例，false：不检索服务
+    #fetch-registry: false
+  instance:
+    instance-id: springcloud-provider-dept8002  #修改eureka默认描述信息就是status
+
+#info配置
+info:
+  app.name: kzj-springcloud
+  company.name: com.common.kzj
